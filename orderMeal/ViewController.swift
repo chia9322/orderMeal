@@ -19,23 +19,11 @@ class ViewController: UIViewController {
     // MARK: - Order Message Outlet
     @IBOutlet var beforeOrderMessageLabel: UILabel!
     @IBOutlet var afterOrderMessageLabel: UILabel!
-    @IBOutlet var orderNumberLabel: UILabel! {
-        didSet {
-            orderNumberLabel.clipsToBounds = true
-            orderNumberLabel.layer.cornerRadius = orderNumberLabel.bounds.width/2
-        }
-    }
+    @IBOutlet var orderNumberLabel: UILabel!
    
     // MARK: - Form Outlet
     @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var beverageSegmentedControl: UISegmentedControl! {
-        didSet {
-            if let customFont = UIFont(name: "Gaegu-Regular", size: 20.0) {
-                let attr = [NSAttributedString.Key.font: customFont]
-                beverageSegmentedControl.setTitleTextAttributes(attr, for: UIControl.State.normal)
-            }
-        }
-    }
+    @IBOutlet var beverageSegmentedControl: UISegmentedControl!
     @IBOutlet var friesSlider: UISlider!
     @IBOutlet var friesSizeLabel: UILabel!
     @IBOutlet var hamburgerSizeSwitch: UISwitch!
@@ -44,6 +32,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set order number label style
+        orderNumberLabel.clipsToBounds = true
+        orderNumberLabel.layer.cornerRadius = orderNumberLabel.bounds.width/2
+        
+        // Set segmented control custom font
+        if let customFont = UIFont(name: "Gaegu-Regular", size: 20.0) {
+            let attr = [NSAttributedString.Key.font: customFont]
+            beverageSegmentedControl.setTitleTextAttributes(attr, for: UIControl.State.normal)
+        }
         
         // Hide meal images, order number and order message
         beverageImage.isHidden = true
@@ -57,8 +55,6 @@ class ViewController: UIViewController {
         friesSlider.value = 2
         friesSizeLabel.text = "Medium"
         hamburgerSizeSwitch.isOn = false
-        
-        
     }
     
     // MARK: - Fries Slider
